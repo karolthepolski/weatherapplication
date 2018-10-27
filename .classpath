@@ -9,10 +9,10 @@
 	</classpathentry>
 	<classpathentry kind="lib" path="lib/okhttp-3.11.0.jar"/>
 	<classpathentry kind="lib" path="lib/okio-1.14.0.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Skania/eclipse-workspace/CityCheck/lib/jackson-core-2.9.7.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Skania/eclipse-workspace/CityCheck/lib/log4j-1.2.17.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Skania/eclipse-workspace/CityCheck/lib/jackson-databind-2.9.7.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Skania/eclipse-workspace/CityCheck/lib/jackson-annotations-2.9.7.jar"/>
+	<classpathentry kind="lib" path="lib/jackson-core-2.9.7.jar"/>
+	<classpathentry kind="lib" path="lib/log4j-1.2.17.jar"/>
+	<classpathentry kind="lib" path="lib/jackson-databind-2.9.7.jar"/>
+	<classpathentry kind="lib" path="lib/jackson-annotations-2.9.7.jar"/>
 	<classpathentry kind="lib" path="lib/json.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
