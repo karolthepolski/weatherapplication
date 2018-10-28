@@ -1,6 +1,6 @@
 package application;
 
-public class WeatherClass {
+public class WeatherInformation {
 	private String ts;
 	private Integer hu;
 	private String ic;
