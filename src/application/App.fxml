@@ -7,6 +7,7 @@
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -28,9 +29,9 @@
         </Menu>
       </menus>
     </MenuBar>
-    <SplitPane dividerPositions="0.27060133630289535" focusTraversable="true" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
+    <SplitPane dividerPositions="0.2505567928730512, 0.7505567928730512" focusTraversable="true" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
       <items>
-        <AnchorPane scaleShape="false" SplitPane.resizableWithParent="false">
+        <AnchorPane maxWidth="200.0" minWidth="200.0" prefWidth="200.0" scaleShape="false" SplitPane.resizableWithParent="false">
           <children>
             <Label alignment="CENTER" layoutX="14.0" layoutY="14.0" minWidth="60.0" prefWidth="-1.0" style="&#10;" text="Master" textAlignment="CENTER" wrapText="false">
               <font>
@@ -52,15 +53,19 @@
                   <Label id="lblPM25" fx:id="lblPM25" layoutX="173.0" layoutY="468.0" text="Label" />
                   <Label layoutX="24.0" layoutY="494.0" text="PM10" />
                   <Label id="lblPM10" fx:id="lblPM10" layoutX="173.0" layoutY="494.0" text="Label" />
-            <AnchorPane id="Content" layoutX="300.0" layoutY="14.0" minHeight="-1.0" minWidth="-1.0" prefHeight="545.0" prefWidth="323.0" scaleShape="false">
-              <children>
-                <Label alignment="CENTER" font="$x1" layoutX="14.0" layoutY="14.0" style="&#10;" text="View" textAlignment="CENTER" textFill="$x2" wrapText="false" />
-                        <Text id="txtMain" fx:id="txtMain" layoutX="22.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="392.13671875" />
-              </children>
-            </AnchorPane>
           </children>
         </AnchorPane>
-        <AnchorPane scaleShape="false" SplitPane.resizableWithParent="false">
+        <ScrollPane prefHeight="-1.0" prefWidth="-1.0" SplitPane.resizableWithParent="false">
+          <content>
+            <AnchorPane id="Content" maxWidth="485.0" minHeight="-1.0" minWidth="485.0" prefWidth="485.0" scaleShape="false">
+              <children>
+                <Label alignment="CENTER" font="$x1" layoutX="14.0" layoutY="14.0" style="&#10;" text="View" textAlignment="CENTER" textFill="$x2" wrapText="false" />
+                        <Text id="txtMain" fx:id="txtMain" layoutX="19.0" layoutY="527.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="392.13671875" />
+              </children>
+            </AnchorPane>
+          </content>
+        </ScrollPane>
+        <AnchorPane maxWidth="200.0" minWidth="200.0" prefWidth="200.0" scaleShape="false" SplitPane.resizableWithParent="false">
           <children>
             <Label alignment="CENTER" font="$x1" layoutX="14.0" layoutY="14.0" style="&#10;" text="Details" textAlignment="CENTER" textFill="$x2" wrapText="false" />
                   <MenuButton fx:id="mBtnCountry" layoutX="18.0" layoutY="62.0" mnemonicParsing="false" text="Country" />
