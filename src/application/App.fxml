@@ -7,7 +7,6 @@
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -29,9 +28,9 @@
         </Menu>
       </menus>
     </MenuBar>
-    <SplitPane dividerPositions="0.2505567928730512, 0.7505567928730512" focusTraversable="true" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
+    <SplitPane dividerPositions="0.27060133630289535" focusTraversable="true" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
       <items>
-        <AnchorPane>
+        <AnchorPane scaleShape="false" SplitPane.resizableWithParent="false">
           <children>
             <Label alignment="CENTER" layoutX="14.0" layoutY="14.0" minWidth="60.0" prefWidth="-1.0" style="&#10;" text="Master" textAlignment="CENTER" wrapText="false">
               <font>
@@ -43,12 +42,8 @@
             </Label>
                   <TextField id="inpSearch" fx:id="inpSearch" layoutX="14.0" layoutY="41.0" prefHeight="25.0" prefWidth="137.0" promptText="Enter country" />
                   <Button id="btnSearch" fx:id="btnSearch" layoutX="156.0" layoutY="41.0" mnemonicParsing="false" onAction="#getBtnSearch" text="Search" />
-                  <Label layoutX="17.0" layoutY="178.0" text="Population" />
-                  <Label layoutX="17.0" layoutY="108.0" text="Capitol" />
                   <Label id="lblCountry" fx:id="lblCountry" layoutX="168.0" layoutY="84.0" text="Label" />
                   <Label layoutX="17.0" layoutY="84.0" text="Country" />
-                  <Label id="lblCapitol" fx:id="lblCapitol" layoutX="168.0" layoutY="108.0" text="Label" />
-                  <Label id="lblPopulation" fx:id="lblPopulation" layoutX="168.0" layoutY="180.0" text="Label" />
                   <Label layoutX="22.0" layoutY="420.0" text="Temperature" />
                   <Label id="lblTemperature" fx:id="lblTemperature" layoutX="173.0" layoutY="420.0" text="Label" />
                   <Label layoutX="24.0" layoutY="443.0" text="Wind" />
@@ -57,25 +52,15 @@
                   <Label id="lblPM25" fx:id="lblPM25" layoutX="173.0" layoutY="468.0" text="Label" />
                   <Label layoutX="24.0" layoutY="494.0" text="PM10" />
                   <Label id="lblPM10" fx:id="lblPM10" layoutX="173.0" layoutY="494.0" text="Label" />
-                  <Label layoutX="17.0" layoutY="131.0" text="Language" />
-                  <Label id="lblLanguage" fx:id="lblLanguage" layoutX="168.0" layoutY="132.0" text="Label" />
-                  <Label layoutX="17.0" layoutY="154.0" text="Currency" />
-                  <Label id="lblCurrency" fx:id="lblCurrency" layoutX="168.0" layoutY="156.0" text="Label" />
-                  <Label layoutX="17.0" layoutY="202.0" text="Area" />
-                  <Label id="lblArea" fx:id="lblArea" layoutX="168.0" layoutY="203.0" text="Label" />
-          </children>
-        </AnchorPane>
-        <ScrollPane prefHeight="-1.0" prefWidth="-1.0">
-          <content>
-            <AnchorPane id="Content" minHeight="-1.0" minWidth="-1.0" prefHeight="545.0" prefWidth="430.0">
+            <AnchorPane id="Content" layoutX="300.0" layoutY="14.0" minHeight="-1.0" minWidth="-1.0" prefHeight="545.0" prefWidth="323.0" scaleShape="false">
               <children>
                 <Label alignment="CENTER" font="$x1" layoutX="14.0" layoutY="14.0" style="&#10;" text="View" textAlignment="CENTER" textFill="$x2" wrapText="false" />
                         <Text id="txtMain" fx:id="txtMain" layoutX="22.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="392.13671875" />
               </children>
             </AnchorPane>
-          </content>
-        </ScrollPane>
-        <AnchorPane>
+          </children>
+        </AnchorPane>
+        <AnchorPane scaleShape="false" SplitPane.resizableWithParent="false">
           <children>
             <Label alignment="CENTER" font="$x1" layoutX="14.0" layoutY="14.0" style="&#10;" text="Details" textAlignment="CENTER" textFill="$x2" wrapText="false" />
                   <MenuButton fx:id="mBtnCountry" layoutX="18.0" layoutY="62.0" mnemonicParsing="false" text="Country" />
