@@ -1,6 +1,7 @@
 package application;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -21,6 +22,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -39,6 +42,8 @@ public class AppController implements Initializable{
 	@FXML
 	private Label lblCity, lblCountry;
 	@FXML
+	private Label lblTemperature,lblHumidity, lblPressure, lblWindSpeed, lblWindDirection; 
+	@FXML
 	private Button btnSearch;
 	@FXML
 	private Text txtMain;
@@ -52,6 +57,9 @@ public class AppController implements Initializable{
 	private MenuButton mBtnCity;
 	@FXML
 	private MenuItem mBarFileExit;
+	@FXML
+	private ImageView ivWeather;
+	
 	
 	String mResponse;
 	String country;
@@ -60,7 +68,8 @@ public class AppController implements Initializable{
 
 	@Override
     public void initialize(URL location, ResourceBundle resources) {
-		lblCountry.setText("YES");
+		getCountryList();
+		
 	}
 	
 	@FXML
@@ -75,12 +84,9 @@ public class AppController implements Initializable{
 		
 	//GET INFO FROM SEARCHINPUT	
 	String in = inpSearch.getText();
-	//in = inpSearch.getText();
-	System.out.println(in);
 	
-	getInfoW(in);
-	//txtArea.setText(mResponse);	
-	getCountryList(in);	
+	
+	getCountryList();	
 
 	}
 
@@ -108,7 +114,6 @@ public class AppController implements Initializable{
             	  
             	 JsonNode arrNode = new ObjectMapper().readTree(myResponse);
               	List jsonArray = arrNode.findValues("name");
-              	System.out.println(jsonArray); 
 
               }
               else{   
@@ -125,7 +130,7 @@ public class AppController implements Initializable{
 	
 	//airvisual apikey: mHeiRK6EvwCqKo6Ea
 	
-	private void getCountryList(String in){
+	private void getCountryList(){
 	
 		mBtnCity.getItems().clear();
 		
@@ -136,7 +141,6 @@ public class AppController implements Initializable{
 		//url="http://api.airvisual.com/v2/states?country="+in+"&key=pP2e5BJYG3fwtHhdy";
 		//url="http://api.airvisual.com/v2/states?country="+in+"&key=pP2e5BJYG3fwtHhdy";
 		//url="http://api.airvisual.com/v2/states?country="+in+"&key=pP2e5BJYG3fwtHhdy";
-	System.out.println(url);
 	
 	  Request request = new Request.Builder()
               .url(url)
@@ -153,14 +157,12 @@ public class AppController implements Initializable{
           public void onResponse(Call call, Response response) throws IOException {
               final String myResponse = response.body().string();
               if (!myResponse.isEmpty()){
-              	//System.out.println(myResponse);  
 	               	
               	ObjectMapper objectMapper = new ObjectMapper();
               	objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
               	objectMapper.configure(DeserializationFeature.FAIL_ON_NULL_FOR_PRIMITIVES, false);     	
             	JsonNode arrNode = new ObjectMapper().readTree(myResponse).get("data");
             	List jsonArray = arrNode.findValues("country");
-            	System.out.println(jsonArray);
             	
             	
             	//Creating menu with countries
@@ -171,7 +173,7 @@ public class AppController implements Initializable{
             		    @Override 
             		    public void handle(ActionEvent e) {
             		    	
-            		        System.out.println(((MenuItem)e.getSource()).getText());
+            		        //System.out.println(((MenuItem)e.getSource()).getText());
             		        String countryName = ((MenuItem)e.getSource()).getText();
             		        getRegionList(countryName); 
             		        mBtnCountry.setText(countryName);
@@ -197,7 +199,7 @@ public class AppController implements Initializable{
 		
 		
 		String url = "http://api.airvisual.com/v2/states?country="+country+"&key=pP2e5BJYG3fwtHhdy";	
-		System.out.println(url);
+		//System.out.println(url);
 	
 	  Request request = new Request.Builder()
               .url(url)
@@ -221,7 +223,7 @@ public class AppController implements Initializable{
               	objectMapper.configure(DeserializationFeature.FAIL_ON_NULL_FOR_PRIMITIVES, false);     	
             	JsonNode arrNode = new ObjectMapper().readTree(myResponse).get("data");
             	List jsonArray = arrNode.findValues("state");
-            	System.out.println(jsonArray);
+            	//System.out.println(jsonArray);
             	
             	
             	//Creating menu with countries
@@ -231,7 +233,7 @@ public class AppController implements Initializable{
             		mnItem.setOnAction(new EventHandler<ActionEvent>() {
             		    @Override 
             		    public void handle(ActionEvent e) {
-            		        System.out.println(((MenuItem)e.getSource()).getText());
+            		       // System.out.println(((MenuItem)e.getSource()).getText());
             		        String region = ((MenuItem)e.getSource()).getText();
             		        getCityList(region, country);
             		        mBtnRegion.setText(region);
@@ -261,7 +263,7 @@ public class AppController implements Initializable{
 	
 	
 	String url="http://api.airvisual.com/v2/cities?state="+region+"&country="+country+"&key=pP2e5BJYG3fwtHhdy";
-	System.out.println(url);
+	//System.out.println(url);
 
   Request request = new Request.Builder()
           .url(url)
@@ -285,14 +287,14 @@ public class AppController implements Initializable{
           	objectMapper.configure(DeserializationFeature.FAIL_ON_NULL_FOR_PRIMITIVES, false);     	
         	JsonNode arrNode = new ObjectMapper().readTree(myResponse).get("data");
         	List jsonArray = arrNode.findValues("city");
-        	System.out.println(jsonArray);
+        	//System.out.println(jsonArray);
         	
         	
-        	 JSONObject jsonObject = new JSONObject(myResponse);
-        	 JSONArray dataObject = (JSONArray) jsonObject.get("data");
+        	// JSONObject jsonObject = new JSONObject(myResponse);
+        	// JSONArray dataObject = (JSONArray) jsonObject.get("data");
         	 //JSONArray countryArray = (JSONArray) dataObject.get("city");
         	 
-        	 System.out.print("---" + dataObject);
+        	 //System.out.print("---" + dataObject);
         	
         	//Creating menu with countries
         	MenuItem mnItem;
@@ -301,7 +303,7 @@ public class AppController implements Initializable{
         		mnItem.setOnAction(new EventHandler<ActionEvent>() {
         		    @Override 
         		    public void handle(ActionEvent e) {
-        		        System.out.println(((MenuItem)e.getSource()).getText());
+        		        //System.out.println(((MenuItem)e.getSource()).getText());
         		        String city = ((MenuItem)e.getSource()).getText();
         		        mBtnCity.setText(city);
         		        getWeatherInfo(country, region, city);
@@ -331,7 +333,7 @@ public class AppController implements Initializable{
 		
 		
 		String url = "http://api.airvisual.com/v2/city?city="+city+"&state="+region+"&country="+country+"&key=pP2e5BJYG3fwtHhdy";	
-		System.out.println(url);
+		//System.out.println(url);
 	
 	  Request request = new Request.Builder()
               .url(url)
@@ -360,18 +362,36 @@ public class AppController implements Initializable{
               	 
             	JsonNode arrNode = new ObjectMapper().readTree(myResponse).get("data");            	
 
-            	System.out.println(arrNode);
+            	//System.out.println(arrNode);
            
             	JSONObject dataObject = (JSONObject) jsonObject.get("data");
             	JSONObject currentObject = (JSONObject) dataObject.get("current");           	
             	JSONObject weatherObject = (JSONObject) currentObject.get("weather");
             	
-            	Integer temperature = (Integer)weatherObject.get("tp");
-            	Integer humidity = (Integer)weatherObject.get("hu");
-            	Integer pressure = (Integer)weatherObject.get("pr");
-            	Double windspeed = (Double)weatherObject.get("ws");
-            	Integer winddirection = (Integer)weatherObject.get("wd");
+            	Platform.runLater(new Runnable() {
+                    @Override public void run() {
+                    	lblTemperature.setText(weatherObject.get("tp").toString());
+                    	lblHumidity.setText(weatherObject.get("hu").toString());
+                    	lblPressure.setText(weatherObject.get("pr").toString());
+                    	lblWindSpeed.setText(weatherObject.get("ws").toString());
+                    	lblWindDirection.setText(weatherObject.get("wd").toString());
+                    	String imageURL = "/resources/"+ weatherObject.getString("ic") + ".png";
+                    	String imageUrl = null;
+						try {
+							imageUrl = getClass().getResource(imageURL).toURI().toString();
+						} catch (URISyntaxException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}                   	
+                    	
+                    	Image image = new Image(imageUrl);
+                    	ivWeather.setImage(image);
+                    
+                    }
+                });
             	        	
+            	//System.out.println(weatherObject);
+            	
               }
               else{   
             	txtMain.setText("Sumting went wong, does this place exist?");
