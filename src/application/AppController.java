@@ -58,17 +58,9 @@ public class AppController implements Initializable{
 	String region;
 	String city;
 
-	public static InformationLists information = new InformationLists();
-	public UpdateUI UI = new UpdateUI();
-	
 	@Override
     public void initialize(URL location, ResourceBundle resources) {
 		lblCountry.setText("YES");
-		
-		
-		information.setCountrylist();
-		UI.buildCountryListMenu();
-		
 	}
 	
 	@FXML
@@ -86,11 +78,9 @@ public class AppController implements Initializable{
 	//in = inpSearch.getText();
 	System.out.println(in);
 	
-	
-	
-	//getInfoW(in);
+	getInfoW(in);
 	//txtArea.setText(mResponse);	
-	//UI.buildCountryListMenu();
+	getCountryList(in);	
 
 	}
 
@@ -135,7 +125,71 @@ public class AppController implements Initializable{
 	
 	//airvisual apikey: mHeiRK6EvwCqKo6Ea
 	
+	private void getCountryList(String in){
 	
+		mBtnCity.getItems().clear();
+		
+	String url = "http://api.airvisual.com/v2/countries?key=pP2e5BJYG3fwtHhdy";	
+		//url = "https://api.airvisual.com/v2/cities?country="+in+"&key=pP2e5BJYG3fwtHhdy";
+		//url="http://api.airvisual.com/v2/nearest_station?key=pP2e5BJYG3fwtHhdy";
+		//url="http://api.airvisual.com/v2/cities?state=Dalarnas län&country="+in+"&key=pP2e5BJYG3fwtHhdy";
+		//url="http://api.airvisual.com/v2/states?country="+in+"&key=pP2e5BJYG3fwtHhdy";
+		//url="http://api.airvisual.com/v2/states?country="+in+"&key=pP2e5BJYG3fwtHhdy";
+		//url="http://api.airvisual.com/v2/states?country="+in+"&key=pP2e5BJYG3fwtHhdy";
+	System.out.println(url);
+	
+	  Request request = new Request.Builder()
+              .url(url)
+              .build();
+      OkHttpClient client = new OkHttpClient();
+      
+      //Makecall
+      client.newCall(request).enqueue(new Callback() {
+          @Override
+          public void onFailure(Call call, IOException e) {
+              call.cancel();
+          }
+          @Override
+          public void onResponse(Call call, Response response) throws IOException {
+              final String myResponse = response.body().string();
+              if (!myResponse.isEmpty()){
+              	//System.out.println(myResponse);  
+	               	
+              	ObjectMapper objectMapper = new ObjectMapper();
+              	objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+              	objectMapper.configure(DeserializationFeature.FAIL_ON_NULL_FOR_PRIMITIVES, false);     	
+            	JsonNode arrNode = new ObjectMapper().readTree(myResponse).get("data");
+            	List jsonArray = arrNode.findValues("country");
+            	System.out.println(jsonArray);
+            	
+            	
+            	//Creating menu with countries
+            	MenuItem mnItem;
+            	for(Object country : jsonArray) {
+            		mnItem = new MenuItem(country.toString().replace("\"", ""));     
+            		mnItem.setOnAction(new EventHandler<ActionEvent>() {
+            		    @Override 
+            		    public void handle(ActionEvent e) {
+            		    	
+            		        System.out.println(((MenuItem)e.getSource()).getText());
+            		        String countryName = ((MenuItem)e.getSource()).getText();
+            		        getRegionList(countryName); 
+            		        mBtnCountry.setText(countryName);
+            		        }
+            		});
+            	mBtnCountry.getItems().add(mnItem);             	
+            	}   
+            	
+              }
+              else{   
+            	txtMain.setText("Sumting went wong, does this place exist?");
+              }
+
+          }
+      }); 	
+      //Call ended   
+	}	
+		
 	private void getRegionList(String country) {
 		
 		
